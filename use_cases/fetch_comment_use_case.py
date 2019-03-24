@@ -9,7 +9,7 @@ class Fetch_Youtube_Comment_Use_Case:
     def fetch_comment(self, args):
         api = YouTubeApi()
         comment_data = api.get_video_comment(args)
-        f = self.file_repository.open_file("dummy_name.txt")
+        f = self.file_repository.open_file("dummy_name.csv")
         for comment in comment_data:
             line = ";".join(comment)
             line.replace("\r\n", " $ ")
