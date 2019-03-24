@@ -25,17 +25,31 @@ YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
 class YouTubeApi():
 
     def load_comments(self, mat):
+        comment_data = []
         for item in mat["items"]:
             comment = item["snippet"]["topLevelComment"]
             author = comment["snippet"]["authorDisplayName"]
             text = comment["snippet"]["textDisplay"]
-            print("Comment by {}: {}".format(author, text))
+            # print("Comment by {}: {}".format(author, text))
+
+            comment_data.append([
+                author,
+                text,
+                "NOT_REPLY"
+            ])
+
             if 'replies' in item.keys():
                 for reply in item['replies']['comments']:
                     rauthor = reply['snippet']['authorDisplayName']
                     rtext = reply["snippet"]["textDisplay"]
+                    comment_data.append([
+                        rauthor,
+                        rtext,
+                        "REPLY"
+                    ])
 
-                print("\n\tReply by {}: {}".format(rauthor, rtext), "\n")
+                # print("\n\tReply by {}: {}".format(rauthor, rtext), "\n")
+        return comment_data
 
     def get_video_comment(self, args):
 
@@ -61,7 +75,8 @@ class YouTubeApi():
             mat = json.loads(matches)
             nextPageToken = mat.get("nextPageToken")
 
-            self.load_comments(mat)
+            comment_data = []
+            comment_data = comment_data + (self.load_comments(mat))
 
             while nextPageToken:
                 parms.update({'pageToken': nextPageToken})
@@ -71,9 +86,10 @@ class YouTubeApi():
                 print("\nPage : ", i)
                 print("------------------------------------------------------------------")
 
-                self.load_comments(mat)
+                comment_data = comment_data + (self.load_comments(mat))
 
                 i += 1
+            return comment_data
         except KeyboardInterrupt:
             print("User Aborted the Operation")
 
