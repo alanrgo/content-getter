@@ -1,7 +1,11 @@
 import argparse
 from use_cases.fetch_comment_use_case import * 
 
-class Fetch_Youtube_Comments_Controller():
+
+class FetchYoutubeCommentsController:
+
+    def __init__(self):
+        return
 
     def fetch_comment(self):
         parser = argparse.ArgumentParser()
@@ -10,7 +14,7 @@ class Fetch_Youtube_Comments_Controller():
         parser.add_argument("--ytb", help="calls comment function by keyword function", action='store_true')
         parser.add_argument("--c", help="calls comment function by keyword function", action='store_true')
         parser.add_argument("--max", help="number of comments to return")
-        parser.add_argument("--videourl", help="Required URL for which comments to return")
+        parser.add_argument("--videourl", help="Required URL from which comments will be returned")
         parser.add_argument("--key", help="Required API key")
 
         args = parser.parse_args()
