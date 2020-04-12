@@ -15,3 +15,8 @@ TDD se trata de Test-Driven-Development e a abordagem garante que futuras modifi
 
 `python -m unittest discover`
 
+## Exemplo de comandos 
+
+### Remoção de Linhas Duplicadas em Texto
+
+`python3 app.py --txt --input [path_do_arquivo]`
