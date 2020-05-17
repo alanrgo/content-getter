@@ -8,7 +8,8 @@ if __name__ == "__main__":
 
     if len(sys.argv) == 1:
         print("\nPlease, insert the flag for the right scope:")
-        print("--ytb: \tYoutube Tools\n")
+        print("--ytb: \tYoutube Tools")
+        print("--txt: \tYoutube Tools\n")
         exit()
 
     if str(sys.argv[1]) == "--ytb":
